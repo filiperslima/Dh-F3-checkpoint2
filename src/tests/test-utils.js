@@ -16,8 +16,7 @@ const renderWithContext = (ui, providerValue)=>{
         </BrowserRouter>
     )
 }
-
-//Only for testing individual routes as /dentist/:id
+//Only for testing individual routes as /dentist/:idd
 export const renderWithRouter = (ui, {route = '/', path='/'}) => {
     window.history.pushState({}, 'Test page', route)
 
