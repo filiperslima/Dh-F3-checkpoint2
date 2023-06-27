@@ -1,13 +1,16 @@
+import { useContext, useState } from "react";
+import { themes, ThemesContext } from "../Contextos/ThemesContext";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
-
+  const {theme, handleChangeTheme} = useContext(ThemesContext)
+  
   return (
     <header className="sticky-top">
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
       <nav
-        className={`navbar navbar-expand-sm navbar-light bg-light`}
+        className={`navbar navbar-expand-sm navbar-${theme.body} bg-${theme.body}`}
         aria-label="Third navbar example"
       >
         <div className="container">
@@ -55,9 +58,10 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${styles.btnStyle}`}
+                  className={`btn btn-${theme.body} ${styles.btnStyle} `}
+                  onClick={handleChangeTheme}
                 >
-                  ☀ 🌙{" "}
+                  {theme.body == 'dark'? "☀" : "🌙"}
                 </button>
               </li>
             </ul>

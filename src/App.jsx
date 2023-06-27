@@ -3,38 +3,32 @@ import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import { ThemesContext, themes } from "./Contextos/ThemesContext"
-// import ThemeConsumer from "./contexts/ThemeConsumer";
+import ThemeConsumer from "./Contextos/ThemeConsumer";
 import { useState, useContext, Fragment } from "react";
 
 function App() {
 
-  const { themes } = useContext(ThemesContext)
-  // const [theme, setTheme] = useState(themes.darkTheme);
+  const [theme, setTheme] = useState(themes.lightTheme);
 
-  // const handleChangeTheme = () => {
-  //   console.log("Filho disparou a função que troca o tema");
-  //   theme == themes.dark ? setTheme(themes.light) : setTheme(themes.dark);
-  // };
+  const handleChangeTheme = () => {
+    console.log("Filho disparou a função que troca o tema e o tema atual é " + `${theme.body}`);
+    theme == themes.darkTheme ? setTheme(themes.lightTheme) : setTheme(themes.darkTheme);
+  };
 
   return (
+    < div className={`app ${theme.body}`}>
+      <ThemesContext.Provider value={{ theme, handleChangeTheme }}>
 
-    <ThemesContext.Provider value={themes}>
-
-      < div className={`
-      ${themes.card}
-      ${themes.icons}
-      ${themes.modal}
-      ${themes.closeBtn}
-        `}>
         <Navbar />
         <main>
           <Outlet />
         </main>
         <Footer />
 
-      </div >
+      </ThemesContext.Provider>
+    </div >
 
-    </ThemesContext.Provider>
+
 
 
 

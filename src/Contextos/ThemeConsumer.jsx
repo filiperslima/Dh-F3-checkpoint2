@@ -2,14 +2,10 @@ import { useContext } from "react";
 import { ThemesContext } from "./ThemesContext";
 
 function ThemeConsumer({ children }) {
-    const { themes } = useContext(ThemesContext)
+    const {theme} = useContext(ThemesContext)
+
     return (
-        <div className={`
-        ${themes.card}
-        ${themes.icons}
-        ${themes.modal}
-        ${themes.closeBtn}
-        `}>
+        <div>
 
             {children}
 
