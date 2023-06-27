@@ -55,8 +55,7 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${styles.btnStyle
-                    }`}
+                  className={`btn btn-light${styles.btnStyle}`}
                 >
                   ☀ 🌙{" "}
                 </button>

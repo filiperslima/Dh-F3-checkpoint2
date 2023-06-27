@@ -12,7 +12,7 @@ const Card = () => {
           src="/images/doctor.jpg"
           alt="doctor placeholder"
         />
-        <div className={`card-body ${styles.CardBody}`}>
+        <div className={`card-  ${styles.CardBody}`}>
           {/* Na linha seguinte o link deverá utilizar a matricula, nome e sobrenome do dentista
           que vem da API */}
           <a href={`/dentist/MatriculaDoDentista`}>
