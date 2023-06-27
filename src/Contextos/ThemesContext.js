@@ -19,5 +19,5 @@ const themes = {
     }
 }
 
-const ThemesContext = createContext(themes.darkTheme)
+const ThemesContext = createContext(themes.lightTheme)
 export {themes, ThemesContext};

@@ -1,21 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemesContext } from "../Contextos/ThemesContext";
 import styles from "./Form.module.css";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-
-const LoginForm = () => {
-  
+const LoginForm = () => {  
   const { theme } = useContext(ThemesContext)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate();
-
-
   const handleSubmit =  async (e) => {
     e.preventDefault();
     try {
@@ -23,7 +17,6 @@ const LoginForm = () => {
         username,
         password
       });
-
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
@@ -37,17 +30,14 @@ const LoginForm = () => {
       alert("Verifique suas informações novamente");
     }
   };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     if (name === 'username') {
       setUsername(value);
     } else if (name === 'password') {
       setPassword(value);
     }
   };
-
   const validateForm = () => {
     return username.length >= 5 && password.length >= 5;
   };
