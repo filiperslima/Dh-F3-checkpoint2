@@ -3,9 +3,11 @@ import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
 import { ThemesContext } from "../Contextos/ThemesContext";
 import useTheme from "../Hooks/useTheme";
+import useAuth from "../Hooks/useAuth";
 
 const DetailCard = () => {
   const {theme} = useTheme()
+  const {hasUser} = useAuth()
   
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const DetailCard = () => {
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row`}
+          className={`card-body ${theme.card} row`}
         >
           <div className="col-sm-12 col-lg-6">
             <img

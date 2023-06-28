@@ -1,5 +1,6 @@
 // import { useContext } from "react";
 // import { ThemesContext } from "../Contextos/ThemesContext";
+import { Link } from "react-router-dom";
 import useTheme from "../Hooks/useTheme";
 import styles from "./Card.module.css";
 
@@ -18,13 +19,13 @@ const Card = ({ dentista }) => {
         <div className={`${theme.body}  ${styles.CardBody}`}>
           {/* Na linha seguinte o link deverá utilizar a matricula, nome e sobrenome do dentista
           que vem da API */}
-          <a href={`/dentist/${dentista.matricula}`}>
+          <Link to={`/dentist/${dentista.matricula}`}>
             <h5 className={`card-title ${styles.title}`}>
               {dentista.nome}
               <br></br>
               {dentista.sobrenome}
             </h5>
-          </a>
+          </Link>
         </div>
       </div>
     </>

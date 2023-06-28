@@ -37,7 +37,7 @@ const Home = () => {
     <>
       <h1>Home</h1>
       <div className="card-grid container">
-        {dentistas.map((dentista) => { return <Card dentista={dentista} /> })}
+        {dentistas.map((dentista) => { return <Card dentista={dentista} key={dentista.matricula} /> })}
       </div>
     </>
   );
