@@ -41,5 +41,10 @@
   },
   "devDependencies": {
     "msw": "^0.47.3"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios)/)"
+    ]
   }
 }
