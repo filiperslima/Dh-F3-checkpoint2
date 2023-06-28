@@ -14,14 +14,18 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App/>}>
-      <Route path="/home" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/detail" element={<Detail />} />
-      </Route>
-    </Routes>
+  <React.StrictMode>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/detail" element={<Detail />} />
+        </Route>
+      </Routes>
+
+  </React.StrictMode>
 
 
 
@@ -30,7 +34,5 @@ root.render(
 
 
 
-
-
-  </BrowserRouter>
+  </BrowserRouter >
 );

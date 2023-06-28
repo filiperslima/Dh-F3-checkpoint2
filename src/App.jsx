@@ -3,9 +3,10 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import { ThemesContext, themes } from "./Contextos/ThemesContext"
 import { useState, useEffect } from "react";
+import { createContext } from "react";
 
 function App() {
-
+  const usuarioLogado = createContext(false);
   const [theme, setTheme] = useState(themes.lightTheme);
 
   const handleChangeTheme = () => {
@@ -27,7 +28,7 @@ function App() {
 
   return (
     < div className={`app ${theme.body}`}>
-      <ThemesContext.Provider value={{ theme, handleChangeTheme }}>
+      <ThemesContext.Provider value={{ theme, handleChangeTheme, usuarioLogado }}>
 
         <Navbar />
         <main>

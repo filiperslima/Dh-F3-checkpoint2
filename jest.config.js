@@ -4,4 +4,5 @@ module.exports = {
       'src/tests/',
       __dirname      
     ]
+    
   }
