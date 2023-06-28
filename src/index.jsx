@@ -24,7 +24,8 @@ root.render(
             <Route path="/" element={<Navigate to={'/home'} />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/dentist/:id" element={<Detail />} />
+            
           </Route>
         </Routes>
       </BrowserRouter >
