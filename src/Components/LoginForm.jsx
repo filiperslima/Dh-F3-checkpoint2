@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { ThemesContext } from "../Contextos/ThemesContext";
 import styles from "./Form.module.css";
 import axios from "axios";
+import useAuth from "../Hooks/useAuth";
 
 
-const LoginForm = () => {  
-  
+const LoginForm = () => {
+
   const { theme } = useContext(ThemesContext)
+  const {setHasUser} = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate();
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('https://dhodonto.ctdprojetointegrador.com/auth', {
@@ -22,12 +24,13 @@ const LoginForm = () => {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
+        setHasUser(true)
         navigate("/home")
         alert("Login bem sucedido");
-      }else{
+      } else {
         alert("Erro ao logar")
       }
-        
+
     } catch (error) {
       alert("Verifique suas informações novamente");
     }

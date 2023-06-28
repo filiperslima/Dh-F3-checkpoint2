@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { themes, ThemesContext } from "../Contextos/ThemesContext";
+import useAuth from "../Hooks/useAuth";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   const { theme, handleChangeTheme } = useContext(ThemesContext)
-
+  const {hasUser, setHasUser, logoutUser} = useAuth();
   return (
     <header className="sticky-top">
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
@@ -46,7 +47,10 @@ const Navbar = () => {
                 ao formulário de login
                 O botão de logout deverá ser testado darkmode
                 se sim, btn-dark, se não, btn-light */}
-                <Link className="nav-link" to={'/login'}>Login</Link>
+                {hasUser ? <Link className="nav-link" onClick={logoutUser}>Logout</Link>
+                  :
+                  <Link className="nav-link" to={'/login'}>Login</Link>}
+
 
               </li>
               <li className={`nav-item`}>

@@ -45,5 +45,10 @@
     "@babel/preset-react": "^7.22.5",
     "babel-jest": "^29.5.0",
     "msw": "^0.47.3"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios)/)"
+    ]
   }
 }

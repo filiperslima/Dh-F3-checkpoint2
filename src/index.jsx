@@ -8,7 +8,7 @@ import Login from "./Routes/Login";
 import Detail from "./Routes/Detail";
 import Footer from "./Components/Footer";
 import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -19,11 +19,13 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="/" element={<Navigate to={'/home'}/>}/>
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/detail" element={<Detail />} />
         </Route>
       </Routes>
+      </BrowserRouter >
 
   </React.StrictMode>
 
@@ -34,5 +36,4 @@ root.render(
 
 
 
-  </BrowserRouter >
 );

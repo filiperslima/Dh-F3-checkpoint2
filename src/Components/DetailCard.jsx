@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
+import { ThemesContext } from "../Contextos/ThemesContext";
 
 const DetailCard = () => {
+  const {theme} = useContext(ThemesContext)
+  
 
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api passando o 
@@ -42,7 +45,7 @@ const DetailCard = () => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button
+                className={`btn btn-${theme.body} ${styles.button
                   }`}
               >
                 Marcar consulta
