@@ -4,7 +4,7 @@ import useTheme from "../Hooks/useTheme";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const scrollToTop = () => {
     window.scrollTo(0, 0)
   }
@@ -20,10 +20,10 @@ const Footer = () => {
               <div className={`col-sm-12 col-lg-6`}>
                 {/* //Na linha seguinte deverá ser feito um teste se a aplicação
                 // está em dark mode e deverá utilizar o css correto */}
-                <img className={`${styles.dhLogo}`} src="/images/DH.png" alt='DH-logo' />
+                <img className={ theme.body === "dark"? `${styles.dhLogo} ${styles.iconsDark}` : `${styles.dhLogo}` } src="/images/DH.png" alt='DH-logo' />
               </div>
-              <div className={`col-sm-12 col-lg-6 ${styles.icons} `}>
-                <img src="/images/ico-facebook.png" alt="ícone do facebook" className={`${styles.icon} ${theme.icons}`} />
+              <div className={theme.body == "dark"? `col-sm-12 col-lg-6 ${styles.icons}`: `col-sm-12 col-lg-6 ${styles.icons} ${styles.iconsDark} `}>
+                <img src="/images/ico-facebook.png" alt="ícone do facebook" className={`${styles.icon} ${theme.icons}  `} />
                 <img src="/images/ico-instagram.png" alt="ícone do instagram" className={styles.icon} />
                 <img src="/images/ico-whatsapp.png" alt="ícone do whatsapp" className={styles.icon} />
                 <img src="/images/ico-tiktok.png" alt="ícone do tiktok" className={styles.icon} />
