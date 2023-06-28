@@ -2,9 +2,10 @@ import { useContext, useEffect } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
 import { ThemesContext } from "../Contextos/ThemesContext";
+import useTheme from "../Hooks/useTheme";
 
 const DetailCard = () => {
-  const {theme} = useContext(ThemesContext)
+  const {theme} = useTheme()
   
 
   useEffect(() => {

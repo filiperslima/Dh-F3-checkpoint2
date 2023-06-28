@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { ThemesContext } from "../Contextos/ThemesContext";
+import useTheme from "../Hooks/useTheme";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
-  const { theme } = useContext(ThemesContext)
+  const { theme } = useTheme()
   const scrollToTop = () => {
     window.scrollTo(0, 0)
   }

@@ -1,18 +1,21 @@
+// import { useContext } from "react";
+// import { ThemesContext } from "../Contextos/ThemesContext";
+import useTheme from "../Hooks/useTheme";
 import styles from "./Card.module.css";
 
 const Card = () => {
-
+  const {theme} = useTheme()
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card`}>
+      <div className={`${theme.card}`}>
         <img
           className="card-img-top"
           src="/images/doctor.jpg"
           alt="doctor placeholder"
         />
-        <div className={`card-  ${styles.CardBody}`}>
+        <div className={`${theme.body}  ${styles.CardBody}`}>
           {/* Na linha seguinte o link deverá utilizar a matricula, nome e sobrenome do dentista
           que vem da API */}
           <a href={`/dentist/MatriculaDoDentista`}>

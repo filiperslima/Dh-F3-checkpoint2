@@ -11,12 +11,14 @@ function AuthContextProvider({ children }) {
         return localStorage.removeItem("token")
     }
 
+    
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (token) {
             setHasUser(true)
         }
     }, [])
+
 
     return (
         <AuthContext.Provider value={{ hasUser, setHasUser, logoutUser }}>{children}</AuthContext.Provider>

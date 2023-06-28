@@ -1,53 +1,45 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import { ThemesContext, themes } from "./Contextos/ThemesContext"
-import { useState, useEffect } from "react";
+// import { ThemesContext, themes } from "./Contextos/ThemesContext"
+// import { useState, useEffect } from "react";
 import AuthContextProvider from "./Contextos/AuthContextProvider";
+import ThemesContextProvider from "./Contextos/ThemeContextProvider";
+// import ThemesContextProvide from "./Contextos/ThemeContextProvider";
+import ThemeContextProvider from "./Contextos/ThemeContextProvider";
+import useTheme from "./Hooks/useTheme";
 
 
 function App() {
+  const { theme } = useTheme();
+  // const [theme, setTheme] = useState(themes.lightTheme);
 
-  const [theme, setTheme] = useState(themes.lightTheme);
+  // const handleChangeTheme = () => {
+  //   theme === themes.lightTheme ? setTheme(themes.darkTheme) : setTheme(themes.lightTheme);
 
-  const handleChangeTheme = () => {
-    theme === themes.lightTheme ? setTheme(themes.darkTheme) : setTheme(themes.lightTheme);
+  // };
+  // useEffect(() => {
+  //   const actualTheme = localStorage.getItem('theme')
+  //   if (actualTheme) {
+  //     const themeConverted = JSON.parse(actualTheme)
+  //     setTheme(themeConverted)
+  //   }
 
-  };
-  useEffect(() => {
-    const actualTheme = localStorage.getItem('theme')
-    if (actualTheme) {
-      const themeConverted = JSON.parse(actualTheme)
-      setTheme(themeConverted)
-    }
-
-  }, [])
-  useEffect(() => {
-    localStorage.setItem('theme', JSON.stringify(theme))
-  }, [theme])
+  // }, [])
+  // useEffect(() => {
+  //   localStorage.setItem('theme', JSON.stringify(theme))
+  // }, [theme])
 
   return (
-    < div className={`app ${theme.body}`}>
-      <AuthContextProvider>
-        <ThemesContext.Provider value={{ theme, handleChangeTheme }}>
-
+      < div className={`app ${theme.body}`}>
+        <AuthContextProvider>
           <Navbar />
           <main>
             <Outlet />
           </main>
           <Footer />
-
-
-        </ThemesContext.Provider>
-      </AuthContextProvider>
-    </div >
-
-
-
-
-
-
-
+        </AuthContextProvider>
+      </div >
   );
 }
 

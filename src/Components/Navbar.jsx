@@ -2,10 +2,11 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { themes, ThemesContext } from "../Contextos/ThemesContext";
 import useAuth from "../Hooks/useAuth";
+import useTheme from "../Hooks/useTheme";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
-  const { theme, handleChangeTheme } = useContext(ThemesContext)
+  const { theme, handleChangeTheme } = useTheme()
   const {hasUser, setHasUser, logoutUser} = useAuth();
   return (
     <header className="sticky-top">
@@ -37,7 +38,7 @@ const Navbar = () => {
             <ul className="navbar-nav mb-2 mb-sm-0">
               <li className={`nav-item ${styles.navBarLink}`}>
                 {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
-                <Link className="nav-link" to={'/home'}>Home</Link>
+                <Link className={`nav-link`} to={'/home'}>Home</Link>
 
               </li>
               <li className={`nav-item ${styles.navBarLink}`}>

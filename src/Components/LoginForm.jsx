@@ -4,11 +4,12 @@ import { ThemesContext } from "../Contextos/ThemesContext";
 import styles from "./Form.module.css";
 import axios from "axios";
 import useAuth from "../Hooks/useAuth";
+import useTheme from "../Hooks/useTheme";
 
 
 const LoginForm = () => {
 
-  const { theme } = useContext(ThemesContext)
+  const { theme } = useTheme()
   const {setHasUser} = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
