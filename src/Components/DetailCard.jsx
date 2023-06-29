@@ -1,63 +1,100 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
-import { ThemesContext } from "../Contextos/ThemesContext";
 import useTheme from "../Hooks/useTheme";
 import useAuth from "../Hooks/useAuth";
+import { useParams } from 'react-router-dom';
+import axios from "axios";
 
 const DetailCard = () => {
-  const {theme} = useTheme()
-  const {hasUser} = useAuth()
-  
+  const { theme } = useTheme()
+  const { hasUser } = useAuth()
+
+  const params = useParams();
+  const [dentista, setDentista] = useState([]);
+ 
+
+console.log(params.id);
+
+
+const getDentista = async () => {
+  try {
+    const response = await axios.get(`https://dhodonto.ctdprojetointegrador.com/dentista?matricula=${params.id}`);
+if (response.status === 200) {
+  setDentista(response.data)
+      
+}
+
+  console.log(response.data);
+
+    
+  } catch (err) {
+    console.log(err)
+
+  }
+
+
+}
 
   useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api passando o 
-    //id do dentista que está vindo do react-router e carregar os dados em algum estado
+    getDentista()
+
   }, []);
+
   return (
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api
     <>
-      <h1>Detail about Dentist {'Nome do Dentista'} </h1>
-      <section className="card col-sm-12 col-lg-6 container">
-        {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
-        <div
-          className={`card-body ${theme.card} row`}
-        >
-          <div className="col-sm-12 col-lg-6">
-            <img
-              className="card-img-top"
-              src="/images/doctor.jpg"
-              alt="doctor placeholder"
-            />
-          </div>
-          <div className="col-sm-12 col-lg-6">
-            <ul className="list-group">
-              <li className="list-group-item">Nome: {'Nome do Dentista'}</li>
-              <li className="list-group-item">
-                Sobrenome: {'Sobrenome do Dentista'}
-              </li>
-              <li className="list-group-item">
-                Usuário: {'Nome de usuário do Dentista'}
-              </li>
-            </ul>
-            <div className="text-center">
-              {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-              // está em dark mode e deverá utilizado o css correto */}
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                className={`btn btn-${theme.body} ${styles.button
-                  }`}
-              >
-                Marcar consulta
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <ScheduleFormModal />
+     {
+     dentista.map (dentista => {
+      return(
+         <div key={dentista.matricula}>
+
+           <h1>Detail about Dentist {dentista.nome} </h1>
+           <section className="card col-sm-12 col-lg-6 container">
+             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
+             // está em dark mode e deverá utilizar o css correto */}
+             <div
+               className={`card-body ${theme.card} row`}
+             >
+               <div className="col-sm-12 col-lg-6">
+                 <img
+                   className="card-img-top"
+                   src="/images/doctor.jpg"
+                   alt="doctor placeholder"
+                 />
+               </div>
+               <div className="col-sm-12 col-lg-6">
+                 <ul className="list-group">
+                   <li className="list-group-item">Nome: {dentista.nome}</li>
+                   <li className="list-group-item">
+                     Sobrenome: {dentista.sobrenome}
+                   </li>
+                   <li className="list-group-item">
+                     Usuário: {'Nome de usuário do Dentista'}
+                   </li>
+                 </ul>
+                 <div className="text-center">
+                   {/* //Na linha seguinte deverá ser feito um teste se a aplicação
+                   // está em dark mode e deverá utilizado o css correto */}
+                   <button
+                     data-bs-toggle="modal"
+                     data-bs-target="#exampleModal"
+                     className={`btn btn-${theme.body} ${styles.button
+                       }`}
+                   >
+                     Marcar consulta
+                   </button>
+                 </div>
+               </div>
+             </div>
+           </section>
+           <ScheduleFormModal />
+
+         </div>
+)
+     })}
+     
     </>
   );
 };
