@@ -23,8 +23,10 @@ describe("LoginForm", () => {
     fireEvent.click(screen.getByText("Send"));
   
     // Verifica se o token foi armazenado no localStorage
-    expect(localStorage.getItem("token")).not.toBe(null);
+    expect(localStorage.getItem("token")).not.toBeNull();
 
 
   });
 });
+
+
