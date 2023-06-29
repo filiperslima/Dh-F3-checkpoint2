@@ -71,7 +71,7 @@ if (response.status === 200) {
                      Sobrenome: {dentista.sobrenome}
                    </li>
                    <li className="list-group-item">
-                     Usuário: {'Nome de usuário do Dentista'}
+                     Usuário: {dentista.usuario.username}
                    </li>
                  </ul>
                  <div className="text-center">
