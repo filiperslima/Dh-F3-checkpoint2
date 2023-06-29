@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import LoginForm from "../../../Components/LoginForm";
-
+import { renderContext } from "../../test-utils";
 
 
 
@@ -9,7 +9,7 @@ describe("LoginForm", () => {
   
   it("deve realizar o login com sucesso", async () => {
     // Renderiza o componente LoginForm
-    render( <LoginForm/>);
+    renderContext( <LoginForm/>);
     
     // Obtém os elementos de input
     const loginInput = screen.getByPlaceholderText("Login");
@@ -23,7 +23,7 @@ describe("LoginForm", () => {
     fireEvent.click(screen.getByText("Send"));
   
     // Verifica se o token foi armazenado no localStorage
-    expect(localStorage.getItem("token")).not.toBeNull();
+    expect(localStorage.getItem("token")).not.toBe(null);
 
 
   });

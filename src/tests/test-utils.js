@@ -1,19 +1,15 @@
 import { render } from "@testing-library/react"
 import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom"
-import { ContextProvider } from "../Components/utils/global.context"
-import Home from "../Routes/Home"
-import Detail from "../Routes/Detail"
-import Login from "../Routes/Login"
-import App from "../App"
+import ThemesContextProvider from "../Contextos/ThemeContextProvider"
 
 
 
 const renderWithContext = (ui, providerValue)=>{
     return render(
         <BrowserRouter>
-            <ContextProvider value={providerValue || {theme: "light", data: []}} >   
+            <ThemesContextProvider value={providerValue || {theme: "light", data: []}} >   
                 {ui}
-            </ContextProvider>
+            </ThemesContextProvider>
         </BrowserRouter>
     )
 }
@@ -31,4 +27,4 @@ export const renderWithRouter = (ui, {route = '/', path='/'}) => {
 }
 
 export * from "@testing-library/react"
-export {renderWithContext as render}  
+export {renderWithContext as renderContext}  
