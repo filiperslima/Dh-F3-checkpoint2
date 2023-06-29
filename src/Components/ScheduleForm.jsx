@@ -1,13 +1,94 @@
-import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./ScheduleForm.module.css";
 
 const ScheduleForm = () => {
+  const [dentistas, setDentistas] = useState([])
+  const [pacientes, setPacientes] = useState([])
+  const navigate = useNavigate();
   useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
-    //e pacientes e carregar os dados em 2 estados diferentes
+    const getData = async () => {
+      try {
+        const response = await axios.get(" https://dhodonto.ctdprojetointegrador.com/dentista", {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+        if (response.status === 200) {
+          setDentistas(response.data)
+        }
+      } catch (err) {
+        console.log(err)
+
+      }
+    }
+    const getDataPaciente = async () => {
+      try {
+        const response = await axios.get(" https://dhodonto.ctdprojetointegrador.com/paciente", {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+        if (response.status === 200) {
+          setPacientes(response.data.body)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getDataPaciente()
+    getData()
+
+
   }, []);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+
+  }, []);
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const { dentist, patient, appointmentDate } = event.target;
+    const token = localStorage.getItem("token");
+    console.log(dentist.value, patient.value, appointmentDate.value, token)
+    const body = {
+      paciente: {
+        matricula: patient.value
+      },
+      dentista: {
+        matricula: dentist.value
+      },
+      dataHoraAgendamento: appointmentDate.value
+    }
+    try {
+      const response = await axios.post("https://dhodonto.ctdprojetointegrador.com/consulta", body, {
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`
+        }
+      });
+      if(response.status === 200||201){
+        alert("Consulta agendada com sucesso")
+        navigate("/")
+      } else if (response.status === 403){
+        alert("Token espirado. Por favor, logar novamente.")
+        localStorage.removeItem("token")
+        navigate("/login")
+      } else if( response.status === 400){
+        alert("Ocorreu um erro ao tentar realizar o agendamento!")
+      }
+      console.log(response.status)
+      
+      
+    
+
+    }
+    catch {
+
+    }
+
     //Nesse handlesubmit você deverá usar o preventDefault,
     //obter os dados do formulário e enviá-los no corpo da requisição 
     //para a rota da api que marca a consulta
@@ -31,9 +112,13 @@ const ScheduleForm = () => {
               </label>
               <select className="form-select" name="dentist" id="dentist">
                 {/*Aqui deve ser feito um map para listar todos os dentistas*/}
-                <option key={'Matricula do dentista'} value={'Matricula do dentista'}>
-                  {`Nome Sobrenome`}
-                </option>
+                {dentistas.map(dado => {
+                  return (
+                    <option key={dado.matricula} value={dado.matricula}>
+                      {dado.sobrenome}
+                    </option>
+                  )
+                })}
               </select>
             </div>
             <div className="col-sm-12 col-lg-6">
@@ -42,9 +127,13 @@ const ScheduleForm = () => {
               </label>
               <select className="form-select" name="patient" id="patient">
                 {/*Aqui deve ser feito um map para listar todos os pacientes*/}
-                <option key={'Matricula do paciente'} value={'Matricula do paciente'}>
-                  {`Nome Sobrenome`}
-                </option>
+                {pacientes.map(dado => {
+                  return (
+                    <option key={dado.matricula} value={dado.matricula}>
+                      {dado.sobrenome}
+                    </option>
+                  )
+                })}
               </select>
             </div>
           </div>
