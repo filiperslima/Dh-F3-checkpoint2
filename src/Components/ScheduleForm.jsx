@@ -52,7 +52,6 @@ const ScheduleForm = () => {
     event.preventDefault()
     const { dentist, patient, appointmentDate } = event.target;
     const token = localStorage.getItem("token");
-    console.log(dentist.value, patient.value, appointmentDate.value, token)
     const body = {
       paciente: {
         matricula: patient.value
@@ -69,23 +68,21 @@ const ScheduleForm = () => {
           'authorization': `Bearer ${token}`
         }
       });
-      if(response.status === 200||201){
+      if (response.status === 200 || 201) {
         alert("Consulta agendada com sucesso")
         navigate("/")
-      } else if (response.status === 403){
+        window.location.reload()
+        
+      } else if (response.status === 403) {
         alert("Token espirado. Por favor, logar novamente.")
         localStorage.removeItem("token")
         navigate("/login")
-      } else if( response.status === 400){
-        alert("Ocorreu um erro ao tentar realizar o agendamento!")
       }
       console.log(response.status)
-      
-      
-    
 
     }
     catch {
+      alert("Ocorreu um erro ao tentar realizar o agendamento!")
 
     }
 
@@ -154,8 +151,8 @@ const ScheduleForm = () => {
             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
             <button
-              className={`btn btn-light ${styles.button
-                }`}
+              name="modal"
+              className={`btn btn-light ${styles.button}`}
               type="submit"
             >
               Schedule
