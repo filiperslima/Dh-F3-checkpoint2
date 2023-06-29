@@ -12,7 +12,12 @@ const DetailCard = () => {
 
   const params = useParams();
   const [dentista, setDentista] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const token = localStorage.getItem('token');
 
+  useEffect(() => {
+    setIsButtonDisabled(!token);
+  }, [token]);
 
 
 
@@ -71,10 +76,12 @@ const DetailCard = () => {
                       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
                    // está em dark mode e deverá utilizado o css correto */}
                       <button
+                        disabled={isButtonDisabled}
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         className={`btn btn-${theme.body} ${styles.button
-                          }`}
+                          }`
+                        }
                       >
                         Marcar consulta
                       </button>
