@@ -21,7 +21,7 @@ const getDentista = async () => {
   try {
     const response = await axios.get(`https://dhodonto.ctdprojetointegrador.com/dentista?matricula=${params.id}`);
 if (response.status === 200) {
-  setDentista(response.data)
+  setDentista([response.data])
       
 }
 

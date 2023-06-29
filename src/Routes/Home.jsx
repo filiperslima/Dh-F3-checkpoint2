@@ -32,12 +32,14 @@ const Home = () => {
     //Armazena-los em um estado para posteriormente fazer um map
     //Usando o componente <Card />
   }, []);
-  
+
   return (
     <>
       <h1>Home</h1>
       <div className="card-grid container">
-        {dentistas.map((dentista) => { return <Card dentista={dentista} key={dentista.matricula} /> })}
+        {
+          dentistas.map((dentista) => { return <Card dentista={dentista} key={dentista.matricula} /> })
+        }
       </div>
     </>
   );
