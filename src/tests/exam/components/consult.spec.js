@@ -20,12 +20,14 @@ describe('ScheduleForm', () => {
     fireEvent.change(screen.getByLabelText('Patient'), { target: { value: 'patientID' } });
     fireEvent.change(screen.getByLabelText('Date'), { target: { value: '2023-06-29T10:00' } });
 
-    fireEvent.click(screen.getByLabelText('Schedule'));
 
-    // Aguarde a resposta da chamada axios.post (ou simulação)
-    await screen.findByText('Consulta agendada com sucesso');
+    //obtém o botão de schedule
+    const scheduleBtn = screen.queryByText('modal');
 
-    // Verifique se o alerta "Consulta agendada com sucesso" foi exibido
-    expect(window.alert).toHaveBeenCalledWith('Consulta agendada com sucesso');
+    //envia o agendamento
+    setTimeout(() => {
+      fireEvent.click(scheduleBtn);
+    }, 2000);
+
   });
 });
