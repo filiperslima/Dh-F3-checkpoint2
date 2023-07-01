@@ -50,9 +50,11 @@ form{
 
 .btn-light{
   background-color: #212529;
+  color: white;
 }
 .btn-dark{
   background-color: #dddbdb;
+  color: black;
 }
 
 .card-grid{

@@ -12,14 +12,6 @@ const DetailCard = () => {
 
   const params = useParams();
   const [dentista, setDentista] = useState([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const token = localStorage.getItem('token');
-
-  useEffect(() => {
-    setIsButtonDisabled(!token);
-  }, [token]);
-
-
 
   const getDentista = async () => {
     try {
@@ -53,7 +45,7 @@ const DetailCard = () => {
                 {/* //Na linha seguinte deverá ser feito um teste se a aplicação
              // está em dark mode e deverá utilizar o css correto */}
                 <div
-                  className={theme.body ? ` card-body row ${styles.cardDark}` : `card-body row`}
+                  className={theme.body == "dark" ? `card-body ${styles.cardDark} row ` : `card-body row`}
                 >
                   <div className="col-sm-12 col-lg-6">
                     <img
@@ -76,11 +68,10 @@ const DetailCard = () => {
                       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
                    // está em dark mode e deverá utilizado o css correto */}
                       <button
-                        disabled={isButtonDisabled}
+                        disabled={!hasUser}
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
-                        className={`btn btn-${theme.body} ${styles.button
-                          }`
+                        className={theme.body == 'dark' ? `btn btn-light ${styles.button} ` : `btn btn-dark ${styles.button}`
                         }
                       >
                         Marcar consulta
