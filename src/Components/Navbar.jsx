@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { themes, ThemesContext } from "../Contextos/ThemesContext";
 import useAuth from "../Hooks/useAuth";
 import useTheme from "../Hooks/useTheme";
 import styles from "./Navbar.module.css";

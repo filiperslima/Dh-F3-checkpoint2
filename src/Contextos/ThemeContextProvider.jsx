@@ -37,7 +37,7 @@ function ThemesContextProvider({ children }) {
         localStorage.setItem('theme', JSON.stringify(theme))
     }, [theme])
     return (
-        <ThemeContext.Provider value={{ theme, themes, setTheme, handleChangeTheme }}>{children}</ThemeContext.Provider>
+        <ThemeContext.Provider value={{ theme, setTheme, handleChangeTheme }}>{children}</ThemeContext.Provider>
     );
 }
 

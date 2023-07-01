@@ -53,7 +53,7 @@ const DetailCard = () => {
                 {/* //Na linha seguinte deverá ser feito um teste se a aplicação
              // está em dark mode e deverá utilizar o css correto */}
                 <div
-                  className={`card-body ${theme.card} row`}
+                  className={theme.body ? ` card-body row ${styles.cardDark}` : `card-body row`}
                 >
                   <div className="col-sm-12 col-lg-6">
                     <img

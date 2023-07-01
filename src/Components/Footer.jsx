@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { ThemesContext } from "../Contextos/ThemesContext";
 import useTheme from "../Hooks/useTheme";
 import styles from "./Footer.module.css";
 
